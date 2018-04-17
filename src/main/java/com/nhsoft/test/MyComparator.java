@@ -9,15 +9,14 @@ public class MyComparator<T> implements Comparator<T> {
 
     private String sortField;
     private String sortType;
-    private String defultField;
+
 
     public MyComparator() {
     }
-    public MyComparator(String sortField, String sortType, String defultField) {
+    public MyComparator(String sortField, String sortType) {
 
         this.sortField = toUpperCaseFirst(sortField);
         this.sortType = sortType;
-        this.defultField = toUpperCaseFirst(defultField);
     }
 
     //首字母转大写
@@ -46,37 +45,51 @@ public class MyComparator<T> implements Comparator<T> {
         try {
             Class clazz01 = data01.getClass();
             Method method01 = clazz01.getMethod("get" + sortField);
-            Object obj01 = clazz01.newInstance();
-
 
             Class clazz02 = data02.getClass();
             Method method02 = clazz02.getMethod("get" + sortField);
-            Object obj02 = clazz02.newInstance();
-            Object invoke02 = method02.invoke(obj02);
 
 
             Type type=method02.getGenericReturnType();
             String end = type.toString();
             String substring = end.substring(type.toString().lastIndexOf(".") + 1, end.length());
             if("Integer".equals(substring)){
-                Object invoke01 = method01.invoke(obj01);
+                Integer invoke01 = (Integer)method01.invoke(data01);
+                Integer invoke02 = (Integer)method02.invoke(data02);
 
+                if (invoke01.compareTo(invoke02) > 0) {
+                    return value01;
+                } else if (invoke01.compareTo(invoke02) < 0) {
+                    return value02;
+                } else {
+                    return 0;
+                }
             }
             if("String".equals(substring)){
-
+                String invoke01 = (String)method01.invoke(data01);
+                String invoke02 = (String)method02.invoke(data02);
+                if (invoke01.compareTo(invoke02) > 0) {
+                    return value01;
+                } else if (invoke01.compareTo(invoke02) < 0) {
+                    return value02;
+                } else {
+                    return 0;
+                }
             }
             if("BigDecimal".equals(substring)){
-
+                BigDecimal invoke01 = (BigDecimal)method01.invoke(data01);
+                BigDecimal invoke02 = (BigDecimal)method02.invoke(data02);
+                if (invoke01.compareTo(invoke02) > 0) {
+                    return value01;
+                } else if (invoke01.compareTo(invoke02) < 0) {
+                    return value02;
+                } else {
+                    return 0;
+                }
             }
 
 
-           /* if (method01.invoke(obj01).compareTo(method02.invoke(obj02)) > 1) {
-                return value01;
-            } else if (invoke01.compareTo(invoke02) < 0) {
-                return value02;
-            } else {
-                return 0;
-            }*/
+
         } catch (Exception e) {
             e.printStackTrace();
         }

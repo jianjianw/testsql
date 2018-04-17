@@ -1,10 +1,7 @@
 package com.nhsoft;
 
 import com.google.gson.Gson;
-import com.nhsoft.test.BranchProfitData;
-import com.nhsoft.test.PageResult;
-import com.nhsoft.test.TestComparator;
-import com.nhsoft.test.TestDaoImpl;
+import com.nhsoft.test.*;
 import com.sun.istack.internal.localization.NullLocalizable;
 import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -1053,7 +1050,7 @@ public class SQLExample {
                 list.add(data03);
                 list.add(data04);
 
-                TestComparator comparator = new TestComparator("posItemCode","desc");
+                MyComparator<BranchProfitData> comparator = new MyComparator<>("posItemCode","desc");
                 Collections.sort(list,comparator);
 
 
