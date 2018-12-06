@@ -3,13 +3,14 @@ package com.nhsoft;
 import com.google.gson.Gson;
 import com.nhsoft.test.*;
 import com.sun.istack.internal.localization.NullLocalizable;
-import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Field;
@@ -25,6 +26,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 
 public class SQLExample {
 
@@ -1089,5 +1092,213 @@ public class SQLExample {
                 return (new StringBuilder()).append(Character.toUpperCase(str.charAt(0))).append(str.substring(1)).toString();
         }
         }
+
+        @Test
+        public void test45(){
+                //添加基本支付方式
+                List<String> paymentTypes = new ArrayList<>();
+                paymentTypes.add("美团支付");
+                paymentTypes.add("饿了么支付");
+                paymentTypes.add("有赞支付");
+                paymentTypes.add("微商城支付");
+                paymentTypes.add("拼团支付");
+                paymentTypes.add("饿百支付");
+
+                boolean flag = paymentTypes.contains("美团支付.");
+                System.out.println(flag);
+        }
+
+        private static Logger logger = LoggerFactory.getLogger(SQLExample.class);
+        @Test
+        public void test46(){
+
+        logger.debug("This is debug message.");
+        // 记录info级别的信息
+        logger.info("This is info message.");
+        // 记录error级别的信息
+        logger.error("This is error message.");
+
+        }
+
+        @Test
+        public void test47(){
+                List<Integer> list= new ArrayList<>();
+                list.add(1);
+                list.add(2);
+                list.add(3);
+                list.add(4);
+                list.add(5);
+                list.add(6);
+                list.add(7);
+                list.add(8);
+
+                list = list.subList(list.size() - 7, list.size());
+                System.out.println(list.size());
+
+        }
+
+        @Test
+        public void test48(){
+                TestEnum success = TestEnum.SUCCESS;
+                String s = success.toString();
+                System.out.println(s);
+
+        }
+        @Test
+        public void test49(){
+               PhoneNumber phoneNumber = new PhoneNumber();
+               phoneNumber.setName("nimei");
+
+                PhoneNumber phoneNumber2 = new PhoneNumber();
+                phoneNumber2.setName("nimei");
+
+                System.out.println(phoneNumber.hashCode());
+                System.out.println(phoneNumber2.hashCode());
+                System.out.println(phoneNumber.equals(phoneNumber2));
+
+                Map map = new HashMap();
+                map.put(phoneNumber,"ni");
+                Object nimei = map.get(new PhoneNumber("nimei"));
+                System.out.println(nimei);
+                //System.out.println(phoneNumber2.hashCode());
+
+
+        }
+
+        @Test
+        public void test50(){
+                Random random = new Random();
+                int i = random.nextInt(10);
+                System.out.println(i);
+                //ArrayList;
+
+        }
+
+        public static void main (String[] args){
+
+                int[] array  = {1,3,2,6,5};
+
+                //selectSort(array);
+                bubbleSort(array);
+                for (int i = 0; i <array.length ; i++) {
+                        System.out.println(array[i]);
+                }
+
+        }
+
+
+        public static void bubbleSort( int[] array){
+                int length = array.length;
+                for (int i = 0; i < length-1; i++) {
+                        for (int j = 0; j <length-1-i ; j++) {
+                                if(array[j] > array[j+1]){
+                                        swap(array,j,j+1);
+                                }
+                        }
+                }
+
+
+        }
+
+        public static void selectSort( int[] array){
+                int length = array.length;
+                for (int i = 0; i < length - 1; i++) {
+                        for (int j = i+1; j < length ; j++) {
+                                if(array[j] < array[i]){
+                                        swap(array,i,j);
+                                }
+                        }
+                }
+
+        }
+
+        public static  void swap(int[] array,int i, int j){
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+        }
+
+        @Test
+        public void test51(){
+                List<Integer> result = new ArrayList<>();
+                for(int i = 1;i<=10; i++){
+                        int fibonacci1 = fibonacci(i);
+                        result.add(fibonacci1);
+                }
+                System.out.println();
+        }
+
+        @Test
+        public void test53(){
+                //斐波那契数列
+                int fibonacci = fibonacci(2);
+                System.out.println(fibonacci);
+        }
+        //n 带表的是第几个数
+        public int fibonacci(int n){
+                if(n<2){
+                        return n;
+                }else {
+                        return fibonacci(n-1)+fibonacci(n-2);
+                }
+        }
+
+        @Test
+        public void test52() {
+
+                int size = 10;
+                List<Integer> result = new ArrayList<>();
+                for (int i = 0; i <= size-1; i++) {
+                        if (i < 2) {
+                                result.add(1);
+                        } else {
+                                Integer integer = result.get(i - 1);
+                                Integer integer1 = result.get(i - 2);
+                                result.add(integer + integer1);
+                        }
+                }
+
+                Gson gson = new Gson();
+                String s = gson.toJson(result);
+                System.out.println(s);
+
+        }
+
+        @Test
+        public void test54(){
+
+                printN(5);
+        }
+
+        public void printN(int n){
+
+                if(n>0){
+                        System.out.println("nimei");
+                        printN(n-1);
+                        //先调用后返回
+                        System.out.println("haha");
+                        System.out.println(n);
+                }
+        }
+
+        @Test
+        public void test55(){
+                //求阶乘
+                int fn = fn(5);
+                System.out.println(fn);
+        }
+
+        public int fn(int i){
+
+                if(i == 1){
+                        return 1;
+                }else{
+                        return i * fn(i-1);
+                }
+        }
+
+
+
+
 
 }
