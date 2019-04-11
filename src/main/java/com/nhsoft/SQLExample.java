@@ -25,6 +25,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
@@ -1295,6 +1297,29 @@ public class SQLExample {
                 }else{
                         return i * fn(i-1);
                 }
+        }
+
+        @Test
+        public void test57(){
+
+                long l = System.currentTimeMillis();
+                System.out.println(l);
+
+                Date date = new Date();
+                System.out.println(date.getTime());
+        }
+
+        @Test
+        public void test58(){
+
+                String s = UUID.randomUUID().toString();
+                System.out.println(s);
+                System.out.println(s.length());
+
+                Pattern pattern = Pattern.compile("^[\\da-z\\-]{36}$");
+                Matcher matcher = pattern.matcher("s");
+                boolean b = matcher.find();
+                System.out.println(b);
         }
 
 
