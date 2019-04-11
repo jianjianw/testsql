@@ -1271,7 +1271,7 @@ public class SQLExample {
 
                 printN(5);
         }
-
+        //递归输出数字
         public void printN(int n){
 
                 if(n>0){
