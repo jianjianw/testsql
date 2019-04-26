@@ -8,10 +8,21 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -1320,6 +1331,56 @@ public class SQLExample {
                 Matcher matcher = pattern.matcher("s");
                 boolean b = matcher.find();
                 System.out.println(b);
+        }
+
+
+
+        @Test
+        public void exportExcel() {
+                List<Map<String,String>> musicList = new ArrayList<>();
+                Map<String,String> map01 = new HashMap<>();
+                map01.put("sno","1");
+                Map<String,String> map05 = new HashMap<>();
+                map05.put("sno","5");
+                Map<String,String> map02 = new HashMap<>();
+                map02.put("sno","2");
+                musicList.add(map01);
+                musicList.add(map05);
+                musicList.add(map02);
+
+                musicList.sort(Comparator.comparing((a)->a.get("sno")));
+                System.out.println();
+
+
+        }
+
+        @Test
+        public void test110(){
+
+                Float a = 0.4f;
+                BigDecimal bigDecimal = new BigDecimal(a);
+                BigDecimal bigDecimal1 = new BigDecimal("99");
+                BigDecimal multiply = bigDecimal.multiply(bigDecimal1).setScale(2,BigDecimal.ROUND_HALF_UP);
+                System.out.println(multiply);
+
+        }
+
+        @Test
+        public void test111(){
+                List<String> list = new ArrayList<>();
+                list.add("nimei");
+                list.add("nimei");
+                list.add("ni");
+
+                for(int i= list.size()-1;i >=0;i--){
+                        String s = list.get(i);
+                        if(s.equals("nimei")){
+                                list.remove(s);
+                        }
+                }
+
+
+                System.out.println();
         }
 
 
